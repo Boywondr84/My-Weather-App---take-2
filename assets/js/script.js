@@ -4,6 +4,9 @@ var cityName = document.querySelector("#city-input");
 // this variable watches the search button
 var citySearch = document.querySelector("#city-search");
 
+// current weather
+var currentCityWeather = [];
+
 // Use city input name to get Lat & Lon coordinates
 var getCity = function (city) {
     var apiLatLonUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=386d421121bbbad42dc1ad82319e7fc0";
@@ -11,7 +14,7 @@ var getCity = function (city) {
     fetch(apiLatLonUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
+                // console.log(data);
 
                 // store Lat & Lon:
                 cityLat = data[0].lat;
@@ -31,16 +34,19 @@ var weatherData = function(cityLat, cityLon) {
     fetch(getTheWeather).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
-                console.log(data.current.temp);
-                console.log(data.current.humidity);
-                console.log(data.current.wind_speed);
-                console.log(data.current.uvi);
+                // console.log(data);
+                // console.log(data.current.temp);
+                // console.log(data.current.humidity);
+                // console.log(data.current.wind_speed);
+                // console.log(data.current.uvi);
+
                 cityTemp = data.current.temp;
                 cityHumidity = data.current.humidity;
                 cityWind = data.current.wind_speed;
-                cityUv = data.current.uvi;
-                cityTemp = document.getElementById("#Temperature");
+                cityUVI = data.current.uvi;
+                currentCityWeather.push({Temperature, cityTemp}, {Humidity, cityHumidity}, {WindSpeed, cityWind}, {UVI, cityUVI});
+                
+                console.log(currentCityWeather);
             })
         }
     })
@@ -50,7 +56,7 @@ var cityFormSubmitEl = function (event) {
     event.preventDefault();
     // console.log(event);
     var cityNameEl = cityName.value.trim();
-    console.log(cityNameEl);
+    // console.log(cityNameEl);
 
     if (cityNameEl) {
         getCity(cityNameEl);
