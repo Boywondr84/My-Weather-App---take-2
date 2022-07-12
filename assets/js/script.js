@@ -11,6 +11,7 @@ var cityTempEl = document.querySelector("#Temperature");
 var cityHumidityEl = document.querySelector("#Humidity");
 var cityWindSpeedEl = document.querySelector("#WindSpeed");
 var cityUVIEl = document.querySelector("#UVI");
+var cityUVIBackground = document.querySelector(".UVI");
 
 
 // future forecast
@@ -78,6 +79,15 @@ var weatherData = function (cityLat, cityLon) {
                 currentUVIEl.textContent = currentUVI;
                 cityUVIEl.appendChild(document.createTextNode(currentUVI));
 
+                // color alert based on UVI index rating
+                if (currentUVI <= 2) {
+                    cityUVIBackground.style.background = "green";
+                } else if (currentUVI <= 5) {
+                    cityUVIBackground.style.background = "yellow";
+                } else {
+                    cityUVIBackground.style.background = "red";
+                };
+
                 // forecast data
                 var dayOneTemp = data.daily[0].temp.day;
                 var dayOneTempEl = document.createElement("span");
@@ -88,12 +98,12 @@ var weatherData = function (cityLat, cityLon) {
                 var dayOneHumidityEl = document.createElement("span");
                 dayOneHumidityEl.textContent = dayOneHumidity;
                 dayOneHumidityForecastEl.appendChild(document.createTextNode(dayOneHumidity + "%"));
-                
+
                 var dayOneWindSpeed = data.daily[0].wind_speed;
                 var dayOneWindEl = document.createElement("span");
                 dayOneWindEl.textContent = dayOneWindSpeed;
                 dayOneWindForecastEl.appendChild(document.createTextNode(dayOneWindSpeed + "MPH"));
-            
+
 
                 dayTwoTemp = data.daily[1].temp.day;
                 dayTwoHumidity = data.daily[1].humidity;
@@ -128,6 +138,22 @@ var weatherData = function (cityLat, cityLon) {
     })
 };
 
+// get the weather icon
+var weatherIcon = function (icon) {
+    var getWeatherIcon = "https://openweathermap.org/img/wn/" + icon + ".png";
+        fetch(getWeatherIcon).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log(data.current.weather[0].icon);
+
+                    cityIcon = data.current.weather[0].icon;
+                    console.log(cityIcon);
+                    weatherIcon(icon);
+                })
+            }
+        })
+};
+
 var cityFormSubmitEl = function (event) {
     event.preventDefault();
     // console.log(event);
@@ -137,7 +163,7 @@ var cityFormSubmitEl = function (event) {
     currentCityEl.textContent = cityNameEl;
     weatherEl.appendChild(document.createTextNode(cityNameEl));
 
-    
+
 
     if (cityNameEl) {
         getCity(cityNameEl);
