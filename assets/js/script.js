@@ -14,7 +14,9 @@ var cityUVIEl = document.querySelector("#UVI");
 
 
 // future forecast
-var dayOneForecast = [];
+var dayOneTempForecastEl = document.querySelector("#One-Temperature");
+var dayOneHumidityForecastEl = document.querySelector("#One-Humidity");
+var dayOneWindForecastEl = document.querySelector("#One-Wind");
 var dayTwoForecast = [];
 var dayThreeForecast = [];
 var dayFourForecast = [];
@@ -51,38 +53,47 @@ var weatherData = function (cityLat, cityLon) {
             response.json().then(function (data) {
                 console.log(data);
 
-                cityTemp = data.current.temp;
+                // cityTemp = data.current.temp;
                 var currentTemp = data.current.temp;
                 var currentTempEl = document.createElement("span");
                 currentTempEl.textContent = currentTemp;
                 cityTempEl.appendChild(document.createTextNode(currentTemp + "F"));
 
 
-                cityHumidity = data.current.humidity;
+                // cityHumidity = data.current.humidity;
                 var currentHumidity = data.current.humidity;
                 var currentHumidityEl = document.createElement("span");
                 currentHumidityEl.textContent = currentHumidity;
                 cityHumidityEl.appendChild(document.createTextNode(currentHumidity + "%"));
 
-                cityWind = data.current.wind_speed;
+                // cityWind = data.current.wind_speed;
                 var currentWind = data.current.wind_speed;
                 var currentWindEl = document.createElement("span");
                 currentWindEl.textContent = currentWind;
                 cityWindSpeedEl.appendChild(document.createTextNode(currentWind + "MPH"));
 
-                cityUVI = data.current.uvi;
+                // cityUVI = data.current.uvi;
                 var currentUVI = data.current.uvi;
                 var currentUVIEl = document.createElement("span");
                 currentUVIEl.textContent = currentUVI;
                 cityUVIEl.appendChild(document.createTextNode(currentUVI));
 
                 // forecast data
-                dayOneTemp = data.daily[0].temp.day;
-                dayOneHumidity = data.daily[0].humidity;
-                dayOneWindSpeed = data.daily[0].wind_speed;
-                dayOneUVI = data.daily[0].uvi;
-                dayOneForecast.push({ dayOneTemp }, { dayOneHumidity }, { dayOneWindSpeed }, { dayOneUVI });
-                console.log(dayOneForecast, "Day 1");
+                var dayOneTemp = data.daily[0].temp.day;
+                var dayOneTempEl = document.createElement("span");
+                dayOneTempEl.textContent = dayOneTemp;
+                dayOneTempForecastEl.appendChild(document.createTextNode(dayOneTemp + "F"));
+
+                var dayOneHumidity = data.daily[0].humidity;
+                var dayOneHumidityEl = document.createElement("span");
+                dayOneHumidityEl.textContent = dayOneHumidity;
+                dayOneHumidityForecastEl.appendChild(document.createTextNode(dayOneHumidity + "%"));
+                
+                var dayOneWindSpeed = data.daily[0].wind_speed;
+                var dayOneWindEl = document.createElement("span");
+                dayOneWindEl.textContent = dayOneWindSpeed;
+                dayOneWindForecastEl.appendChild(document.createTextNode(dayOneWindSpeed + "MPH"));
+            
 
                 dayTwoTemp = data.daily[1].temp.day;
                 dayTwoHumidity = data.daily[1].humidity;
