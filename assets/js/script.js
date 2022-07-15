@@ -3,6 +3,8 @@ var cityName = document.querySelector("#city-input");
 
 // this variable watches the search button
 var citySearch = document.querySelector("#city-search");
+// city search history
+var cityHistory = document.querySelector("#history");
 
 // current weather
 var weatherEl = document.querySelector("#current-weather");
@@ -156,7 +158,7 @@ var weatherData = function (cityLat, cityLon) {
                 var dayTwoHumidityEl = document.createElement("span");
                 dayTwoHumidityEl.textContent = dayTwoHumidity;
                 dayTwoHumidityForecastEl.appendChild(document.createTextNode(dayTwoHumidity + "%"));
-                
+
                 var dayTwoWindSpeed = Math.round(data.daily[2].wind_speed);
                 var dayTwoWindSpeedEl = document.createElement("span");
                 dayTwoWindSpeedEl.textContent = dayTwoWindSpeed;
@@ -166,7 +168,7 @@ var weatherData = function (cityLat, cityLon) {
                 var dailyDate2El = document.createElement("span");
                 dailyDate2El.textContent = dailyDate2;
                 dayTwoDateEl.appendChild(document.createTextNode(dailyDate2));
-                
+
                 var future3Icon = data.daily[3].weather[0].icon;
                 var future3IconEl = document.createElement("img");
                 future3IconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + future3Icon + "@2x.png");
@@ -176,12 +178,12 @@ var weatherData = function (cityLat, cityLon) {
                 var dayThreeTempEl = document.createElement("span");
                 dayThreeTempEl.textContent = dayThreeTemp;
                 dayThreeTempForecastEl.appendChild(document.createTextNode(dayThreeTemp + "F"));
-                
+
                 var dayThreeHumidity = data.daily[3].humidity;
                 var dayThreeHumidityEl = document.createElement("span");
                 dayThreeHumidityEl.textContent = dayThreeHumidity;
                 dayThreeHumidityForecastEl.appendChild(document.createTextNode(dayThreeHumidity + "%"));
-                
+
                 var dayThreeWindSpeed = Math.round(data.daily[3].wind_speed);
                 var dayThreeWindSpeedEl = document.createElement("span");
                 dayThreeWindSpeedEl.textContent = dayThreeWindSpeed;
@@ -216,7 +218,7 @@ var weatherData = function (cityLat, cityLon) {
                 var dailyDate4El = document.createElement("span");
                 dailyDate4El.textContent = dailyDate4;
                 dayFourDateEl.appendChild(document.createTextNode(dailyDate4));
-                
+
                 var future5Icon = data.daily[5].weather[0].icon;
                 var future5IconEl = document.createElement("img");
                 future5IconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + future5Icon + "@2x.png");
@@ -250,17 +252,17 @@ var weatherData = function (cityLat, cityLon) {
 // get the weather icon
 var weatherIcon = function (icon) {
     var getWeatherIcon = "https://openweathermap.org/img/wn/" + icon + ".png";
-        fetch(getWeatherIcon).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    console.log(data.current.weather[0].icon);
+    fetch(getWeatherIcon).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data.current.weather[0].icon);
 
-                    cityIcon = data.current.weather[0].icon;
-                    console.log(cityIcon);
-                    weatherIcon(icon);
-                })
-            }
-        })
+                cityIcon = data.current.weather[0].icon;
+                console.log(cityIcon);
+                weatherIcon(icon);
+            })
+        }
+    })
 };
 
 var cityFormSubmitEl = function (event) {
@@ -272,17 +274,19 @@ var cityFormSubmitEl = function (event) {
     currentCityEl.textContent = cityNameEl;
     weatherEl.appendChild(document.createTextNode(cityNameEl));
 
-
-
     if (cityNameEl) {
         getCity(cityNameEl);
+        var cityHistoryEl = cityNameEl;
+        var cityHistoryDOMEl = document.createElement("button");
+        cityHistoryDOMEl.textContent = cityHistoryEl;
+        cityHistory.appendChild(cityHistoryDOMEl);
 
         // blank out search bar
         cityName.value = "";
-
     } else {
-        window.alert("Try again.")
-    }
+        window.alert("Enter a city");
+    } 
+    reset("reset-form");
 };
 
 citySearch.addEventListener("click", cityFormSubmitEl);
