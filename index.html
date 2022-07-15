@@ -22,25 +22,65 @@
     </form>
 
     <div class="current-weather" id="current-weather">Current Weather for: </div>
-    <div class="card header">
-        <div class="weather">
+    <div class="bg-dark text-light mb-4">
+        <div class="current" id="current">
             <div class="Temperature" id="Temperature">Temperature: </div>
             <div id="Humidity">Humidity: </div>
             <div id="WindSpeed">Wind Speed: </div>
             <div class="UVI" id="UVI">UVI: </div>
-
         </div>
     </div>
+    </div>
 
-    <div class="day1" id="day1">Forecast for: (Date)</div>
-        <div class="card header">
-            <div class="One-Temperature" id="One-Temperature">Temperature: </div>
-            <div class="One-Humidity" id="One-Humidity">Humidity: </div>
-            <div class="One-Wind" id="One-Wind">Wind Speed: </div>
 
-        </div>
+    <div class="container-fluid">
+        <div class="row mb-4 text-center">
+            <div class="card1">
+                <div class="col" id="future1">
+                    <div class="day1" id="day1">Forecast for: </div>
+                    <div class="One-Temperature" id="One-Temperature">Temperature: </div>
+                    <div class="One-Humidity" id="One-Humidity">Humidity: </div>
+                    <div class="One-Wind" id="One-Wind">Wind Speed: </div>
+                </div>
+            </div>
+            <div class="card1">
+                <div class="col" id="future2">
+                    <div class="day2" id="day2">Forecast for: </div>
+                    <div class="Two-Temperature" id="Two-Temperature">Temperature: </div>
+                    <div class="Two-Humidity" id="Two-Humidity">Humidity: </div>
+                    <div class="Two-Wind" id="Two-Wind">Wind Speed: </div>
+                </div>
+            </div>
 
-    <script src="./assets/js/script.js"></script>
+            <div class="row mb-4 text-center">
+                <div class="card">
+                    <div class="col" id="future3">
+                        <div class="day3" id="day3">Forecast for: </div>
+                        <div class="Three-Temperature" id="Three-Temperature">Temperature: </div>
+                        <div class="Three-Humidity" id="Three-Humidity">Humidity: </div>
+                        <div class="Three-Wind" id="Three-Wind">Wind Speed: </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="col" id="future4">
+                        <div class="day4" id="day4">Forecast for: </div>
+                        <div class="Four-Temperature" id="Four-Temperature">Temperature: </div>
+                        <div class="Four-Humidity" id="Four-Humidity">Humidity: </div>
+                        <div class="Four-Wind" id="Four-Wind">Wind Speed: </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="col" id="future5">
+                        <div class="day5" id="day5">Forecast for: </div>
+                        <div class="Five-Temperature" id="Five-Temperature">Temperature: </div>
+                        <div class="Five-Humidity" id="Five-Humidity">Humidity: </div>
+                        <div class="Five-Wind" id="Five-Wind">Wind Speed: </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+            <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
