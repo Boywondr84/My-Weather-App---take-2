@@ -62,7 +62,6 @@ var getCity = function (city) {
                 cityLon = data[0].lon;
                 // console.log(cityLon, 'lon');
                 weatherData(cityLat, cityLon);
-
             })
         }
     })
@@ -285,8 +284,11 @@ var cityFormSubmitEl = function (event) {
         cityName.value = "";
     } else {
         window.alert("Enter a city");
-    } 
+    }function reset() {
     reset("reset-form");
+    }
 };
 
 citySearch.addEventListener("click", cityFormSubmitEl);
+
+// save to local storage
