@@ -45,3 +45,15 @@ form {
     margin-bottom: 70px;
     border-radius: 2em;
 }
+
+.history {
+    font-size: 24px;
+    margin-left: 10px;
+    padding-bottom: 50px;
+}
+
+.history button {
+    margin-right: 15px;
+    background-color: palevioletred;
+    border-radius: .5em;
+}

@@ -264,6 +264,9 @@ var weatherIcon = function (icon) {
     })
 };
 
+// check local storage
+var oldCity = JSON.parse(localStorage.getItem("city")) || [];
+
 var cityFormSubmitEl = function (event) {
     event.preventDefault();
     // console.log(event);
@@ -273,22 +276,36 @@ var cityFormSubmitEl = function (event) {
     currentCityEl.textContent = cityNameEl;
     weatherEl.appendChild(document.createTextNode(cityNameEl));
 
+    // // check local storage
+    // var oldCity = JSON.parse(localStorage.getItem("city")) || [];
+
     if (cityNameEl) {
         getCity(cityNameEl);
-        var cityHistoryEl = cityNameEl;
-        var cityHistoryDOMEl = document.createElement("button");
-        cityHistoryDOMEl.textContent = cityHistoryEl;
-        cityHistory.appendChild(cityHistoryDOMEl);
+
+        oldCity.push(cityNameEl);
+        localStorage.setItem("city", JSON.stringify(oldCity));
+
+        // loop through city array
+        for (var i = 0; i < oldCity.length; i++) {
+            var newCity = oldCity[i];
+            console.log(newCity);
+
+            // var cityHistoryEl = cityNameEl;
+            var cityHistoryDOMEl = document.createElement("button");
+            cityHistoryDOMEl.textContent = newCity;
+            cityHistory.appendChild(cityHistoryDOMEl);
+        }
 
         // blank out search bar
         cityName.value = "";
     } else {
         window.alert("Enter a city");
-    }function reset() {
-    reset("reset-form");
+        // } function reset() {
+        //     reset("reset-form");
     }
 };
 
 citySearch.addEventListener("click", cityFormSubmitEl);
-
-// save to local storage
+function reset() {
+    reset("reset-form");
+};
